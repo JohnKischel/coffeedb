@@ -1,0 +1,4 @@
+FROM node:alpine
+WORKDIR /code/
+RUN npm install -g @angular/cli
+RUN npm install --save @angular/material @angular/cdk

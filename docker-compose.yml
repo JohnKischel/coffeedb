@@ -1,10 +1,20 @@
 version: "3.9"
 services:
-  web:
-    build: .
+  django:
+    build:
+      dockerfile: .build/django/dockerfile
+      context: .
     command: python coffeedb/manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - .build/django/:/code
     ports:
       - "8000:8000"
-
+  angular:
+    build:
+      context: .build/angular
+      dockerfile: dockerfile
+    command: ng serve --host 0.0.0.0 #--proxy-config src/proxy.conf.json
+    volumes:
+      - .build/angular/coffeedb:/code
+    ports:
+      - "4200:4200"
